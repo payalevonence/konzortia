@@ -3,20 +3,27 @@ connection: "analytics_281547516"
 include: "/views/*.view.lkml"
 include: "/derived_tables/*.view.lkml"
 # include: "*.dashboard.lookml"
+include: "*.dashboard"
 explore: events {
   label: "Google Analytics"
-   always_filter: {
-     filters: [
-       events.event_date: "last 7 days",
+  always_filter: {
+    filters: [
+      events.event_date: "last 7 days",
         events.profile: "281547516"
-     ]
+    ]
 
-    # filters: [
-    #   events.event_date: "last 7 days",
-    #   events.profile: "321684207"
-    # ]
+    filters: [
+      events.event_date: "last 7 days",
+      events.profile: "321684207"
+    ]
+  }
+  # access_filter: {
+  #   field: events.profile
+  #   user_attribute: multiple_values
+  # }
 
-   }
+
+
 
   join: sessions {
     sql_on: ${events.unique_session_id} = ${sessions.unique_session_id} ;;

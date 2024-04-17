@@ -8,10 +8,10 @@ view: events {
 
   parameter: profile {
     type: unquoted
-    allowed_value: {
-      label: "analytics_281547516"
-      value: "281547516"
-    }
+    # allowed_value: {
+    #   label: "analytics_281547516"
+    #   value: "281547516"
+    # }
     allowed_value: {
       label: "analytics_321684207"
       value: "321684207"
@@ -477,6 +477,14 @@ view: events {
     description: "Distinct/Unique count of Users"
     type: count_distinct
     sql: ${user_pseudo_id} ;;
+    # value_format_name: formatted_number
+  }
+
+  measure: all_total_users {
+    label: "all_Users"
+    description: "count of Users"
+    type: count
+    # sql: ${user_pseudo_id} ;;
     # value_format_name: formatted_number
   }
 
