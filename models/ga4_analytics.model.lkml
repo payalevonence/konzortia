@@ -25,6 +25,8 @@ explore: events {
 
 
 
+
+
   join: sessions {
     sql_on: ${events.unique_session_id} = ${sessions.unique_session_id} ;;
     relationship: many_to_one
