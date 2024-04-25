@@ -47,3 +47,7 @@ explore: events {
     relationship: one_to_one
   }
 }
+
+explore: multi_events {
+
+}
