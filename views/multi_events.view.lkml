@@ -20,48 +20,6 @@ parameter: project {
 }
 
 
-  #parameter: schema {
-  #  description: "Use with to choose which schema to query"
-  #  type: string
-  #  allowed_value: {
-  #    label: "analytics_321684207"
-  #    value: "analytics_321684207"
-  #  }
-  #  allowed_value: {
-  #    label: "analytics_281547516"
-  #    value: "analytics_281547516"
-  #  }
-  #}##3
-
-
-
-
-  #view: usage_distributions_small {
-  #  derived_table: {
-  #    sql: SELECT * FROM
-  #          {% if select_date_window._parameter_value == "'week'" %} analytics.daily_usage_summary_week
-  #          {% elsif select_date_window._parameter_value == "'month'" %} analytics.daily_usage_summary_month
-  #          {% elsif select_date_window._parameter_value == "'year'" %} analytics.daily_usage_summary_year
-  #          {% elsif select_date_window._parameter_value == "'school_year'" %} analytics.daily_usage_summary_school_year
-  #          {% else %} analytics.daily_usage_summary_school_year
-  #          {% endif %} base
-
-  #      WHERE {% condition select_date_range %}
-  #      {% if select_date_window._parameter_value == "'school_year'" or select_date_window._parameter_value == "'year'"  %} base.min_daydate
-  #      {% else %} base.date_window
-  #      {% endif %}
-  #      {% endcondition %}
-  #      ;;
-  #  }
-  #  # dimensions and measures go here
-  #}
-
-
-##SELECT * FROM `serious-water-405715.analytics_321684207.events_20240212` LIMIT 10
-##SELECT * FROM `serious-water-405715.analytics_281547516.events_20240212` LIMIT 10
-
-
-
     measure: count {
       type: count
       drill_fields: [detail*]
