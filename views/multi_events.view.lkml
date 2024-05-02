@@ -1,6 +1,12 @@
 view: multi_events {
   derived_table: {
-    sql: SELECT * FROM
+    sql: SELECT *,
+            {% if project._parameter_value == "'analytics_321684207'" %}
+                "Dev"
+            {% elsif project._parameter_value == "'analytics_281547516'" %}
+               "Prod"
+            {% endif %} selected_environment
+                  FROM
             {% if project._parameter_value == "'analytics_321684207'" %}
                 `serious-water-405715.analytics_321684207.events_20240212`
             {% elsif project._parameter_value == "'analytics_281547516'" %}
@@ -23,6 +29,11 @@ parameter: project {
     measure: count {
       type: count
       drill_fields: [detail*]
+    }
+
+    dimension: selected_environment {
+      type: string
+      sql: ${TABLE}.selected_environment ;;
     }
 
     dimension: event_date {

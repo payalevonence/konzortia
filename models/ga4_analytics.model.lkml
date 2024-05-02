@@ -49,5 +49,8 @@ explore: events {
 }
 
 explore: multi_events {
-
+  access_filter: {
+    field: multi_events.selected_environment
+    user_attribute: selected_environment
+  }
 }
