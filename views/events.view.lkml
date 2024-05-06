@@ -1,17 +1,15 @@
 include: "/views/*.view.lkml"
 include: "/derived_tables/*.view.lkml"
 view: events {
-   extends: [base_events, goals, event_funnel,page_funnel]
-  # sql_table_name: `serious-water-405715.analytics_{{ _user_attributes['analytics_dataset'] }}.events_*` ;;
-  sql_table_name: `serious-water-405715.analytics_{{ _user_attributes['multiple_values'] }}.events_*` ;;
-  #sql_table_name: `serious-water-405715.analytics_281547516.events_*` ;;
+  extends: [base_events, goals, event_funnel,page_funnel]
+  sql_table_name: `serious-water-405715.{{ _user_attributes['data_project'] }}.events_*` ;;
 
   parameter: profile {
     type: unquoted
-    # allowed_value: {
-    #   label: "analytics_281547516"
-    #   value: "281547516"
-    # }
+     allowed_value: {
+       label: "analytics_281547516"
+       value: "281547516"
+     }
     allowed_value: {
       label: "analytics_321684207"
       value: "321684207"
@@ -22,22 +20,6 @@ view: events {
     type: string
     sql: "{{_user_attributes['multiple_values']}}";;
   }
-
-
-
-  #   parameter: profile {
-  #   type: unquoted
-  #   allowed_value: {
-  #     label: "occroadhouse"
-  #     value: "281547516"
-  #   }
-  #   allowed_value: {
-  #     label: "alaskatia"
-  #     value: "321684207"
-  #   }
-  # }
-
-
 
   parameter: audience_selector {
     description: "Use to set 'Audience Trait' field to dynamically choose a user cohort."
