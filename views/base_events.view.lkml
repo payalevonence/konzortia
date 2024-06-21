@@ -1,7 +1,22 @@
-# This view file just contains the base fields from the events table. No new logic should be added to this file
 view: base_events {
   derived_table: {
-    sql: SELECT *, _TABLE_SUFFIX FROM `serious-water-405715.analytics_281547516.events_*`;;
+    sql: SELECT *, _TABLE_SUFFIX FROM
+            {% if project._parameter_value == "'analytics_321684207'" %}
+                `serious-water-405715.analytics_321684207.events_*`
+            {% elsif project._parameter_value == "'analytics_281547516'" %}
+               `serious-water-405715.analytics_281547516.events_*`
+            {% endif %}  ;;
+  }
+
+  parameter: project {
+    description: "Use this to choose the DW schema"
+    type: string
+    allowed_value: {
+      value: "analytics_321684207"
+    }
+    allowed_value: {
+      value: "analytics_281547516"
+    }
   }
 
   extension: required
