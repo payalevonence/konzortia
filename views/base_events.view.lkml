@@ -1,6 +1,15 @@
 # This view file just contains the base fields from the events table. No new logic should be added to this file
 view: base_events {
+  derived_table: {
+    sql: SELECT *, _TABLE_SUFFIX FROM `serious-water-405715.analytics_281547516.events_*`;;
+  }
+
   extension: required
+
+  dimension: table_suffix {
+    type: string
+    sql: ${TABLE}._TABLE_SUFFIX ;;
+  }
 
   dimension: app_info__firebase_app_id {
     type: string
