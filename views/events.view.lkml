@@ -1,18 +1,44 @@
 include: "/views/*.view.lkml"
 include: "/derived_tables/*.view.lkml"
+
 view: events {
   extends: [base_events, goals, event_funnel,page_funnel]
-  sql_table_name: `first-infinity-408514.{{ _user_attributes['data_project'] }}.events_*` ;;
+  # sql_table_name: `serious-water-405715.{{ _user_attributes['multiple_values'] }}.events_*` ;;
 
-  parameter: profile {
-    type: unquoted
-     allowed_value: {
-       label: "analytics_281547516"
-       value: "281547516"
-     }
+  # parameter: profile {
+  #   type: unquoted
+  #   allowed_value: {
+  #     label: "analytics_281547516"
+  #     value: "281547516"
+  #   }
+  #   allowed_value: {
+  #     label: "analytics_321684207"
+  #     value: "321684207"
+  #   }
+  # }
+  derived_table: {
+    sql: SELECT *,
+            {% if project._parameter_value == "'analytics_321684207'" %}
+                "Dev"
+            {% elsif project._parameter_value == "'analytics_281547516'" %}
+              "Prod"
+            {% endif %} selected_environment
+                  FROM
+            {% if project._parameter_value == "'analytics_321684207'" %}
+                `serious-water-405715.analytics_321684207.events_20240212`
+            {% elsif project._parameter_value == "'analytics_281547516'" %}
+              `serious-water-405715.analytics_281547516.events_20240212`
+            {% endif %}  ;;
+  }
+
+  parameter: project {
+    description: "Use this to choose the DW schema"
+    type: string
     allowed_value: {
-      label: "analytics_321684207"
-      value: "321684207"
+      value: "analytics_321684207"
+    }
+    allowed_value: {
+      value: "analytics_281547516"
     }
   }
 
