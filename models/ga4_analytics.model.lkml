@@ -15,6 +15,8 @@ explore: events {
     relationship: one_to_one
   }
 
+
+
   join: user_segment {
     type: left_outer
     sql_on: ${events.user_pseudo_id} = ${user_segment.user_pseudo_id} ;;
